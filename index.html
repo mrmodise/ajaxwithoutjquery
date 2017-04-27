@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajax without JQuery</title>
+</head>
+<body>
+<h3>Everything works</h3>
+<script>
+    // lets wrap everything into a function
+    function getLocalStorageData() {
+        // create our Http request object
+        var request = new XMLHttpRequest();
+        // open a connection with the URL specified.
+        request.open('GET', 'your-url-goes-here', true);
+
+        // when the request gets loaded
+        request.onload = function() {
+            if (request.status >= 200 && request.status < 400) {
+                // Success!
+                var resp = request.responseText;
+                console.log(resp) // console output
+            } else {
+                // server returned an error
+                console.log("Error") // print error to console
+            }
+        };
+
+        // in the case of an error
+        request.onerror = function() {
+            // could not make a connection
+            console.log("Connection Error") // print error to console
+        };
+
+        // send the request
+        request.send();
+    }
+
+    // invoke the function
+    getLocalStorageData();
+</script>
+</body>
+</html>
